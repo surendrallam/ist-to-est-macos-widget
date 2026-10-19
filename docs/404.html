@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Page not found · IST to EST</title>
+  <meta name="robots" content="noindex">
+  <meta name="description" content="This page could not be found. Go back to the IST to EST converter and free Mac widget.">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f6f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f13" media="(prefers-color-scheme: dark)">
+  <!-- GitHub Pages serves this page for any missing path, so links are root-relative to the project site. -->
+  <link rel="icon" href="/ist-to-est-macos-widget/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="/ist-to-est-macos-widget/assets/apple-touch-icon.png">
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f6f3;
+      --bg-elev: #ffffff;
+      --text: #17171c;
+      --text-2: #4f4f5a;
+      --border: #e2dfd8;
+      --border-strong: #cdc9c0;
+      --accent: #3d2fb5;
+      --btn-bg: #3d2fb5;
+      --btn-bg-hover: #30249a;
+      --focus: #3d2fb5;
+      --grad-1: #c2410c;
+      --grad-2: #be185d;
+      --grad-3: #3d2fb5;
+      --hero-glow-1: rgba(255, 181, 71, 0.22);
+      --hero-glow-2: rgba(242, 84, 91, 0.14);
+      --hero-glow-3: rgba(61, 47, 181, 0.14);
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-rounded: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f13;
+        --bg-elev: #18181d;
+        --text: #f2f2f5;
+        --text-2: #a8a8b3;
+        --border: #2a2a33;
+        --border-strong: #3c3c47;
+        --accent: #a99fff;
+        --btn-bg: #5446d8;
+        --btn-bg-hover: #6356e6;
+        --focus: #b8b0ff;
+        --grad-1: #ffb547;
+        --grad-2: #ff7a80;
+        --grad-3: #a99fff;
+        --hero-glow-1: rgba(255, 181, 71, 0.12);
+        --hero-glow-2: rgba(242, 84, 91, 0.12);
+        --hero-glow-3: rgba(99, 86, 230, 0.22);
+      }
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+    body {
+      margin: 0; min-height: 100vh; min-height: 100dvh; display: flex; flex-direction: column;
+      background:
+        radial-gradient(42% 60% at 0% 0%, var(--hero-glow-1), transparent 70%),
+        radial-gradient(40% 55% at 78% 18%, var(--hero-glow-2), transparent 70%),
+        radial-gradient(45% 65% at 100% 100%, var(--hero-glow-3), transparent 70%),
+        var(--bg);
+      color: var(--text); font: 400 1rem/1.6 var(--font); -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--accent); text-underline-offset: 0.18em; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+    .container { width: 100%; max-width: 1140px; margin-inline: auto; padding-inline: 16px; }
+    @media (min-width: 640px) { .container { padding-inline: 24px; } }
+    @media (min-width: 1024px) { .container { padding-inline: 32px; } }
+    .skip-link { position: absolute; left: 12px; top: -100px; padding: 10px 16px; border-radius: 10px; background: var(--btn-bg); color: #fff; font-weight: 600; text-decoration: none; }
+    .skip-link:focus { top: 12px; }
+    header { border-bottom: 1px solid var(--border); }
+    .header-inner { display: flex; align-items: center; min-height: 60px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 700; }
+    .brand img { width: 28px; height: 28px; }
+    main { flex: 1; display: grid; place-items: center; padding-block: 64px; outline: none; }
+    .panel { max-width: 34rem; text-align: center; }
+    .code {
+      margin: 0; font-family: var(--font-rounded); font-weight: 800; font-size: clamp(5rem, 3rem + 10vw, 8.5rem); line-height: 1; letter-spacing: -0.04em;
+      background: linear-gradient(100deg, var(--grad-1), var(--grad-2) 45%, var(--grad-3)); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    @media (forced-colors: active) { .code { color: CanvasText; background: none; } }
+    .nowrap { white-space: nowrap; }
+    h1 { text-wrap: balance; margin: 16px 0 0; font-size: clamp(1.6rem, 1.2rem + 1.6vw, 2.25rem); line-height: 1.15; letter-spacing: -0.02em; }
+    p { margin: 12px 0 0; color: var(--text-2); }
+    .actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 12px; margin-top: 28px; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 22px; border-radius: 14px;
+      font-weight: 650; text-decoration: none; border: 1px solid transparent;
+    }
+    .btn-primary { background: var(--btn-bg); color: #fff; }
+    .btn-primary:hover { background: var(--btn-bg-hover); }
+    .btn-secondary { background: var(--bg-elev); color: var(--text); border-color: var(--border-strong); }
+    .btn-secondary:hover { border-color: var(--text-2); }
+    .now { margin-top: 28px; font-size: 0.95rem; font-variant-numeric: tabular-nums; min-height: 1.6em; }
+    footer { padding-block: 24px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 0.9rem; }
+    @media (max-width: 479px) { .actions .btn { flex: 1 1 100%; } }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header>
+    <div class="container header-inner">
+      <a class="brand" href="/ist-to-est-macos-widget/"><img src="/ist-to-est-macos-widget/favicon.svg" width="28" height="28" alt=""><span>IST to EST</span></a>
+    </div>
+  </header>
+  <main id="main" tabindex="-1">
+    <div class="container panel">
+      <p class="code" aria-hidden="true">404</p>
+      <h1>This page is in another time zone</h1>
+      <p>We couldn’t find the page you were looking for. The link may be broken, or the page may have moved.</p>
+      <div class="actions">
+        <a class="btn btn-primary" href="/ist-to-est-macos-widget/">Go to the homepage</a>
+        <a class="btn btn-secondary" href="/ist-to-est-macos-widget/#converter">Convert IST to EST</a>
+      </div>
+      <p class="now" id="now"></p>
+    </div>
+  </main>
+  <footer>
+    <div class="container">© 2026 <a href="https://github.com/surendrallam">surendrallam</a> · <a href="https://github.com/surendrallam/ist-to-est-macos-widget">IST to EST on GitHub</a></div>
+  </footer>
+  <script type="module">
+    import { IST, ET, formatTime, abbreviation } from '/ist-to-est-macos-widget/assets/time.js';
+    const now = new Date();
+    const time = (text) => Object.assign(document.createElement('span'), { className: 'nowrap', textContent: text });
+    document.getElementById('now').replaceChildren(
+      'Meanwhile, it’s ', time(`${formatTime(now, IST)} IST`), ' in India and ',
+      time(`${formatTime(now, ET)} ${abbreviation(ET, now)}`), ' in New York.',
+    );
+  </script>
+</body>
+</html>

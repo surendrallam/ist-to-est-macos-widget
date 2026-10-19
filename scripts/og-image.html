@@ -1,0 +1,79 @@
+<!doctype html>
+<!--
+  Template for docs/assets/og-image.png (1200×630), the social preview used by
+  Open Graph and Twitter cards. Rendered by scripts/render-og-image.mjs.
+-->
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>IST to EST social preview</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+    body {
+      position: relative;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      color: #ffffff;
+      background:
+        radial-gradient(520px 420px at 6% 0%, rgba(255, 181, 71, 0.42), transparent 70%),
+        radial-gradient(560px 460px at 52% 8%, rgba(242, 84, 91, 0.30), transparent 70%),
+        radial-gradient(700px 520px at 100% 100%, rgba(99, 86, 230, 0.55), transparent 70%),
+        linear-gradient(135deg, #1b1640 0%, #120f2c 55%, #0c0a1e 100%);
+      -webkit-font-smoothing: antialiased;
+    }
+    .frame { position: absolute; inset: 0; display: grid; grid-template-columns: 380px 1fr; align-items: center; padding: 0 72px 0 56px; gap: 40px; }
+    .icon { width: 380px; height: 380px; display: block; filter: drop-shadow(0 30px 50px rgba(0, 0, 0, 0.35)); }
+    .copy { min-width: 0; }
+    .kicker {
+      display: inline-flex; align-items: center; gap: 10px; padding: 8px 16px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.1); border: 1px solid rgba(255, 255, 255, 0.18);
+      font-size: 22px; font-weight: 600; letter-spacing: 0.01em; color: rgba(255, 255, 255, 0.88);
+    }
+    h1 {
+      margin: 22px 0 0; font-size: 116px; line-height: 1; font-weight: 800; letter-spacing: -0.04em; white-space: nowrap;
+    }
+    h1 .swap {
+      display: inline-block; margin: 0 0.06em; font-weight: 700;
+      background: linear-gradient(100deg, #ffb547, #ff7a80 55%, #b8b0ff); -webkit-background-clip: text; background-clip: text; color: transparent;
+    }
+    .tagline { margin: 18px 0 0; font-size: 40px; font-weight: 650; letter-spacing: -0.015em; color: rgba(255, 255, 255, 0.94); }
+    .times { display: flex; align-items: center; gap: 16px; margin-top: 36px; }
+    .pill {
+      display: flex; flex-direction: column; gap: 2px; padding: 14px 22px 14px; border-radius: 22px;
+      background: rgba(255, 255, 255, 0.95); color: #1c1c1e; box-shadow: 0 14px 30px -12px rgba(0, 0, 0, 0.5);
+    }
+    .pill.night { background: #1f1f24; color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.14); }
+    .pill .zone { font-size: 19px; font-weight: 750; letter-spacing: 0.02em; }
+    .pill .zone .ist { color: #ffad5a; }
+    .pill .zone .et { color: #1f5fd6; }
+    .pill .zone span + span { margin-left: 8px; font-weight: 500; color: #6e6e73; }
+    .pill.night .zone span + span { color: #a1a1aa; }
+    .pill .time { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; line-height: 1.05; }
+    .pill .time small { font-size: 22px; font-weight: 650; margin-left: 4px; opacity: 0.7; }
+    .arrow { font-size: 22px; font-weight: 700; color: rgba(255, 255, 255, 0.85); padding: 8px 14px; border-radius: 999px; background: rgba(255, 255, 255, 0.12); white-space: nowrap; }
+    .url { position: absolute; left: 56px; bottom: 34px; font-size: 22px; font-weight: 500; color: rgba(255, 255, 255, 0.62); letter-spacing: 0.01em; }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <img class="icon" src="../design/AppIcon.svg" alt="">
+    <div class="copy" id="copy">
+      <span class="kicker">Notification Center widget · macOS 14+</span>
+      <h1>IST <span class="swap">⇄</span> EST</h1>
+      <p class="tagline">Free macOS widget &amp; converter</p>
+      <div class="times">
+        <div class="pill night">
+          <span class="zone"><span class="ist">IST</span><span>New Delhi</span></span>
+          <span class="time">9:30<small>PM</small></span>
+        </div>
+        <span class="arrow">−9:30</span>
+        <div class="pill">
+          <span class="zone"><span class="et">EDT</span><span>New York</span></span>
+          <span class="time">12:00<small>PM</small></span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="url">surendrallam.github.io/ist-to-est-macos-widget</p>
+</body>
+</html>

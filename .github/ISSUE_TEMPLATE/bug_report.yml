@@ -1,0 +1,121 @@
+name: Bug report
+description: The widget or the app shows something wrong or doesn't work.
+title: '[Bug] '
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a problem! If the widget doesn't appear in the gallery, or macOS says the app "can't be opened", the [FAQ](https://surendrallam.github.io/ist-to-est-macos-widget/#faq) has the fix.
+
+  - type: input
+    id: macos-version
+    attributes:
+      label: macOS version
+      description: Apple menu > About This Mac.
+      placeholder: macOS 15.6 Sequoia
+    validations:
+      required: true
+
+  - type: input
+    id: app-version
+    attributes:
+      label: App version
+      description: Shown at the bottom of the IST to EST window.
+      placeholder: 1.0.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: mac
+    attributes:
+      label: Mac
+      options:
+        - Apple silicon (M1 or later)
+        - Intel
+        - Not sure
+    validations:
+      required: false
+
+  - type: dropdown
+    id: widget-style
+    attributes:
+      label: Widget style
+      description: The name shown in the widget gallery.
+      options:
+        - IST to EST (World Clock style)
+        - IST to EST Digital
+        - Not the widget (app window or converter)
+    validations:
+      required: false
+
+  - type: dropdown
+    id: widget-size
+    attributes:
+      label: Widget size
+      description: Which widget shows the problem? Choose all that apply.
+      multiple: true
+      options:
+        - Small
+        - Medium
+        - Large
+        - Not the widget (app window or converter)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: placement
+    attributes:
+      label: Where is the widget?
+      options:
+        - Notification Center
+        - Desktop
+        - Both
+        - Not applicable
+    validations:
+      required: false
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Add the Medium widget to Notification Center
+        2. Wait until 2:00 AM on the day daylight saving time ends
+        3. …
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      placeholder: The US Eastern clock switches from EDT to EST.
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: Include the times shown and your Mac's own time zone if a time looks wrong.
+    validations:
+      required: true
+
+  - type: textarea
+    id: screenshot
+    attributes:
+      label: Screenshot
+      description: Drag and drop a screenshot of the widget or app here (Shift-Command-5 takes one).
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Before submitting
+      options:
+        - label: I searched the existing issues and this hasn't been reported yet.
+          required: true
+        - label: The app is in the Applications folder and I've opened it at least once.
+          required: false

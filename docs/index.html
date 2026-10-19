@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>IST to EST Converter &amp; Mac Widget | Free for macOS</title>
+  <meta name="description" content="Convert India time (IST) to US Eastern time (EST/EDT) in one click, and keep both clocks in Notification Center with a free, open-source Mac widget.">
+  <link rel="canonical" href="https://surendrallam.github.io/ist-to-est-macos-widget/">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <meta name="author" content="surendrallam">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f6f3" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0f0f13" media="(prefers-color-scheme: dark)">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/icon-192.png" type="image/png" sizes="192x192">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="manifest" href="site.webmanifest">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="IST to EST">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:url" content="https://surendrallam.github.io/ist-to-est-macos-widget/">
+  <meta property="og:title" content="IST to EST Converter &amp; Mac Widget">
+  <meta property="og:description" content="See India time and US Eastern time (EST/EDT) side by side in Notification Center, and convert IST to ET in one click. Free and open source for macOS 14+.">
+  <meta property="og:image" content="https://surendrallam.github.io/ist-to-est-macos-widget/assets/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="IST to EST app icon with the text IST ⇄ EST, free macOS widget and converter, 9:30 PM IST equals 12:00 PM EDT">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="IST to EST Converter &amp; Mac Widget">
+  <meta name="twitter:description" content="See India time and US Eastern time (EST/EDT) side by side in Notification Center, and convert IST to ET in one click. Free for macOS 14+.">
+  <meta name="twitter:image" content="https://surendrallam.github.io/ist-to-est-macos-widget/assets/og-image.png">
+  <meta name="twitter:image:alt" content="IST to EST app icon with the text IST ⇄ EST, free macOS widget and converter">
+
+  <link rel="modulepreload" href="assets/time.js">
+  <script type="module" src="assets/app.js"></script>
+
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #f7f6f3;
+      --bg-elev: #ffffff;
+      --bg-sunken: #efede8;
+      --text: #17171c;
+      --text-2: #4f4f5a;
+      --border: #e2dfd8;
+      --border-strong: #cdc9c0;
+      --accent: #3d2fb5;
+      --accent-soft: #ebe8fb;
+      --btn-bg: #3d2fb5;
+      --btn-bg-hover: #30249a;
+      --on-btn: #ffffff;
+      --focus: #3d2fb5;
+      --ist: #a84d07;
+      --et: #1f5fd6;
+      --ok: #1e9e52;
+      --grad-1: #c2410c;
+      --grad-2: #be185d;
+      --grad-3: #3d2fb5;
+      --hero-glow-1: rgba(255, 181, 71, 0.22);
+      --hero-glow-2: rgba(242, 84, 91, 0.14);
+      --hero-glow-3: rgba(61, 47, 181, 0.14);
+      --shadow-sm: 0 1px 2px rgba(23, 23, 28, 0.06);
+      --shadow: 0 1px 2px rgba(23, 23, 28, 0.05), 0 10px 30px -12px rgba(23, 23, 28, 0.16);
+      --widget-top: #ffffff;
+      --widget-bottom: #f2f2f2;
+      --widget-border: rgba(0, 0, 0, 0.1);
+      --widget-text-2: #636369;
+      --badge-text: #4a4a50;
+      --chip: rgba(0, 0, 0, 0.06);
+      --face-day: #ffffff;
+      --ink-day: #1c1c1e;
+      --face-night: #1a1a1a;
+      --ink-night: #ffffff;
+      --hub: #ff8a1f;
+      --code-bg: #1d1b2e;
+      --code-text: #f4f3ff;
+      --row-now: rgba(61, 47, 181, 0.08);
+      --shot-bg: #e0e0e0;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+      --font-rounded: ui-rounded, "SF Pro Rounded", -apple-system, BlinkMacSystemFont, "Segoe UI", Inter, Roboto, sans-serif;
+      --font-mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      --radius: 18px;
+      --gutter: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0f0f13;
+        --bg-elev: #18181d;
+        --bg-sunken: #131317;
+        --text: #f2f2f5;
+        --text-2: #a8a8b3;
+        --border: #2a2a33;
+        --border-strong: #3c3c47;
+        --accent: #a99fff;
+        --accent-soft: #24203f;
+        --btn-bg: #5446d8;
+        --btn-bg-hover: #6356e6;
+        --focus: #b8b0ff;
+        --ist: #ffad5a;
+        --et: #79b0ff;
+        --ok: #34c46a;
+        --grad-1: #ffb547;
+        --grad-2: #ff7a80;
+        --grad-3: #a99fff;
+        --hero-glow-1: rgba(255, 181, 71, 0.12);
+        --hero-glow-2: rgba(242, 84, 91, 0.12);
+        --hero-glow-3: rgba(99, 86, 230, 0.22);
+        --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.4);
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 12px 32px -12px rgba(0, 0, 0, 0.6);
+        --widget-top: #2c2c2e;
+        --widget-bottom: #1f1f21;
+        --widget-border: rgba(255, 255, 255, 0.1);
+        --widget-text-2: #98989d;
+        --badge-text: #d1d1d6;
+        --chip: rgba(255, 255, 255, 0.1);
+        --code-bg: #0a0a0e;
+        --row-now: rgba(169, 159, 255, 0.1);
+        --shot-bg: #141414;
+      }
+    }
+
+    *, *::before, *::after { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: 76px; }
+    @media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 400 1rem/1.6 var(--font);
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+    img, svg { max-width: 100%; }
+    img { height: auto; }
+    h1, h2, h3 { line-height: 1.15; margin: 0; text-wrap: balance; }
+    p { margin: 0; }
+    a { color: var(--accent); text-underline-offset: 0.18em; text-decoration-thickness: 0.08em; }
+    a:hover { text-decoration-thickness: 0.14em; }
+    :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 6px; }
+    [hidden] { display: none !important; }
+    .sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
+    code, kbd, pre { font-family: var(--font-mono); font-size: 0.92em; }
+
+    .container { width: 100%; max-width: 1140px; margin-inline: auto; padding-inline: var(--gutter); }
+    @media (min-width: 640px) { :root { --gutter: 24px; } }
+    @media (min-width: 1024px) { :root { --gutter: 32px; } }
+
+    .skip-link {
+      position: absolute; left: 12px; top: -100px; z-index: 100;
+      padding: 10px 16px; border-radius: 10px;
+      background: var(--btn-bg); color: var(--on-btn); font-weight: 600; text-decoration: none;
+    }
+    .skip-link:focus { top: 12px; }
+
+    /* Header */
+    .site-header {
+      position: sticky; top: 0; z-index: 50;
+      background: var(--bg);
+      background: color-mix(in srgb, var(--bg) 82%, transparent);
+      -webkit-backdrop-filter: saturate(1.6) blur(14px);
+      backdrop-filter: saturate(1.6) blur(14px);
+      border-bottom: 1px solid var(--border);
+      border-bottom-color: color-mix(in srgb, var(--border) 70%, transparent);
+    }
+    .header-inner { display: flex; align-items: center; gap: 16px; min-height: 60px; }
+    .brand { display: inline-flex; align-items: center; gap: 10px; color: var(--text); text-decoration: none; font-weight: 700; letter-spacing: -0.01em; }
+    .brand img { width: 28px; height: 28px; border-radius: 7px; }
+    .header-inner nav { margin-left: auto; }
+    .nav-list { display: none; list-style: none; margin: 0; padding: 0; gap: 4px; }
+    .nav-list a { display: block; padding: 6px 12px; border-radius: 8px; color: var(--text-2); text-decoration: none; font-size: 0.95rem; font-weight: 500; }
+    .nav-list a:hover { color: var(--text); background: var(--bg-sunken); }
+    .header-gh {
+      margin-left: auto; display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 12px; border-radius: 10px; border: 1px solid var(--border);
+      color: var(--text); text-decoration: none; font-size: 0.9rem; font-weight: 600; background: var(--bg-elev);
+    }
+    .header-gh:hover { border-color: var(--border-strong); }
+    .header-gh svg { width: 18px; height: 18px; }
+    @media (min-width: 720px) {
+      .nav-list { display: flex; }
+      .header-gh { margin-left: 8px; }
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+      min-height: 48px; padding: 12px 22px; border-radius: 14px;
+      font: inherit; font-weight: 650; font-size: 1rem; line-height: 1.2;
+      text-decoration: none; cursor: pointer; border: 1px solid transparent;
+      transition: background-color 0.15s ease, border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+    }
+    .btn svg { width: 20px; height: 20px; flex: none; }
+    .btn-primary { background: var(--btn-bg); color: var(--on-btn); box-shadow: 0 8px 20px -8px rgba(61, 47, 181, 0.6); }
+    .btn-primary:hover { background: var(--btn-bg-hover); }
+    .btn-secondary { background: var(--bg-elev); color: var(--text); border-color: var(--border-strong); }
+    .btn-secondary:hover { border-color: var(--text-2); }
+    @media (prefers-reduced-motion: no-preference) { .btn:hover { transform: translateY(-1px); } }
+    .btn-small {
+      min-height: 40px; padding: 8px 14px; border-radius: 11px; font-size: 0.92rem; gap: 8px;
+      background: var(--bg-elev); color: var(--text); border-color: var(--border-strong);
+    }
+    .btn-small:hover { border-color: var(--text-2); }
+    #now-btn { min-height: 48px; }
+    .btn-small svg { width: 16px; height: 16px; }
+
+    /* Hero */
+    .hero {
+      position: relative; isolation: isolate;
+      padding-block: clamp(40px, 7vw, 96px) clamp(48px, 8vw, 104px);
+      background:
+        radial-gradient(42% 60% at 0% 0%, var(--hero-glow-1), transparent 70%),
+        radial-gradient(40% 55% at 78% 18%, var(--hero-glow-2), transparent 70%),
+        radial-gradient(45% 65% at 100% 100%, var(--hero-glow-3), transparent 70%);
+    }
+    .hero-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 6vw, 64px); align-items: center; }
+    @media (min-width: 960px) { .hero-grid { grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr); } }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 5px 12px 5px 6px; border-radius: 999px;
+      background: var(--bg-elev); border: 1px solid var(--border);
+      color: var(--text-2); font-size: 0.85rem; font-weight: 600; box-shadow: var(--shadow-sm);
+    }
+    .eyebrow img { width: 22px; height: 22px; border-radius: 6px; }
+    h1 {
+      margin-top: 20px;
+      font-size: clamp(2.4rem, 1.6rem + 3.6vw, 4rem);
+      font-weight: 800; letter-spacing: -0.035em; line-height: 1.04;
+    }
+    .grad {
+      background: linear-gradient(100deg, var(--grad-1) 0%, var(--grad-2) 45%, var(--grad-3) 100%);
+      -webkit-background-clip: text; background-clip: text; color: transparent;
+      -webkit-box-decoration-break: clone; box-decoration-break: clone;
+    }
+    @media (forced-colors: active) { .grad { color: CanvasText; background: none; } }
+    @media (max-width: 359px) { .eyebrow { font-size: 0.78rem; } }
+    .lead { margin-top: 20px; max-width: 34em; font-size: clamp(1.08rem, 1rem + 0.4vw, 1.25rem); color: var(--text-2); line-height: 1.55; }
+    .cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .fineprint { margin-top: 16px; color: var(--text-2); font-size: 0.9rem; }
+    @media (max-width: 479px) { .cta .btn, .install-cta .btn { flex: 1 1 100%; } }
+
+    /* Live clock card (looks like the medium widget) */
+    .live { container-type: inline-size; justify-self: center; width: 100%; max-width: 500px; }
+    .live-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 12px; }
+    .live-title { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text-2); }
+    .live-dot { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--ok); vertical-align: 1px; }
+    @media (prefers-reduced-motion: no-preference) {
+      .live-dot { animation: pulse 2s ease-in-out infinite; }
+      @keyframes pulse { 50% { opacity: 0.35; } }
+    }
+    .live-local { font-size: 0.85rem; color: var(--text-2); }
+    .widget {
+      display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); align-items: center; gap: 12px;
+      padding: 22px 22px 18px; border-radius: 28px;
+      background: linear-gradient(var(--widget-top), var(--widget-bottom));
+      border: 0.5px solid var(--widget-border);
+      box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1), 0 40px 70px -30px rgba(45, 35, 140, 0.45);
+    }
+    .zone { min-width: 0; }
+    .zone-head { display: flex; align-items: center; gap: 10px; }
+    .clock { width: 64px; height: 64px; flex: none; display: block; filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.18)); }
+    .zone-meta { display: flex; flex-direction: column; line-height: 1.25; min-width: 0; }
+    .abbr { font-size: 0.85rem; font-weight: 750; letter-spacing: 0.02em; }
+    .abbr-ist { color: var(--ist); }
+    .abbr-et { color: var(--et); }
+    .city { font-size: 0.85rem; color: var(--widget-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .digital {
+      margin-top: 10px; white-space: nowrap;
+      font-family: var(--font-rounded); font-weight: 650; font-size: 2.15rem; line-height: 1.05;
+      font-variant-numeric: tabular-nums; letter-spacing: -0.01em;
+    }
+    .digital .period { font-size: 0.45em; font-weight: 650; color: var(--widget-text-2); margin-left: 0.15em; letter-spacing: 0; }
+    .zone-date { margin-top: 4px; font-size: 0.85rem; color: var(--widget-text-2); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .badge { display: flex; flex-direction: column; align-items: center; gap: 4px; color: var(--widget-text-2); }
+    .badge svg { width: 16px; height: 16px; }
+    .badge-text {
+      padding: 2px 8px; border-radius: 999px; background: var(--chip); color: var(--badge-text);
+      font-size: 0.78rem; font-weight: 650; font-variant-numeric: tabular-nums; white-space: nowrap;
+    }
+    .widget-foot {
+      grid-column: 1 / -1; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 4px 12px;
+      margin-top: 6px; padding-top: 12px; border-top: 1px solid var(--widget-border);
+      font-size: 0.85rem; color: var(--widget-text-2);
+    }
+    .widget-foot strong { color: var(--text); font-weight: 650; }
+    .now-sentence { margin-top: 16px; padding-inline: 4px; font-size: 0.95rem; color: var(--text-2); }
+    .now-sentence strong { color: var(--text); font-weight: 650; }
+    .clock .face { fill: var(--face-day); }
+    .clock .ring { fill: none; stroke: var(--ink-day); stroke-opacity: 0.18; stroke-width: 1.4; }
+    .clock { color: var(--ink-day); }
+    .clock.is-night { color: var(--ink-night); }
+    .clock.is-night .face { fill: var(--face-night); }
+    .clock.is-night .ring { stroke: var(--ink-night); }
+    .clock .hand { stroke: currentColor; stroke-linecap: round; }
+    .clock .hand-second { stroke: var(--hub); stroke-width: 1.4; }
+    .clock .hub { fill: var(--hub); }
+    .clock .pin { fill: var(--face-day); }
+    .clock.is-night .pin { fill: var(--face-night); }
+    @media (prefers-reduced-motion: reduce) { .clock .hand-second { display: none; } }
+    @container (max-width: 420px) {
+      .widget { padding: 18px 16px 14px; gap: 8px; border-radius: 24px; }
+      .clock { width: 46px; height: 46px; }
+      .zone-head { gap: 8px; }
+      .abbr, .city { font-size: 0.78rem; }
+      .digital { font-size: 1.6rem; margin-top: 8px; }
+      .zone-date { font-size: 0.78rem; }
+      .badge-text { font-size: 0.72rem; padding: 2px 6px; }
+      .widget-foot { font-size: 0.8rem; }
+    }
+    @container (max-width: 330px) {
+      .zone-head { flex-direction: column; align-items: flex-start; gap: 6px; }
+      .digital { font-size: 1.45rem; }
+      .clock { width: 42px; height: 42px; }
+    }
+
+    /* Sections */
+    .section { padding-block: clamp(56px, 8vw, 104px); }
+    .section-alt { background: var(--bg-elev); border-block: 1px solid var(--border); }
+    .section-head { max-width: 46rem; margin-bottom: clamp(28px, 4vw, 44px); }
+    .section-head h2 { font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem); font-weight: 780; letter-spacing: -0.025em; }
+    .section-head p { margin-top: 14px; color: var(--text-2); font-size: 1.08rem; }
+    .kicker { display: block; margin-bottom: 10px; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--accent); }
+    .card { background: var(--bg-elev); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .section-alt .card { background: var(--bg); }
+
+    /* Converter */
+    .converter { display: grid; grid-template-columns: minmax(0, 1fr); overflow: hidden; }
+    @media (min-width: 900px) { .converter { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); } }
+    .conv-form { padding: clamp(20px, 3vw, 32px); display: grid; gap: 20px; align-content: start; }
+    .seg { border: 0; margin: 0; padding: 0; min-width: 0; }
+    .seg legend, .field label { display: block; margin-bottom: 8px; font-size: 0.9rem; font-weight: 650; color: var(--text); padding: 0; }
+    .seg-track { display: grid; grid-template-columns: 1fr 1fr; padding: 4px; border-radius: 13px; background: var(--bg-sunken); border: 1px solid var(--border); }
+    .seg input { position: absolute; opacity: 0; width: 1px; height: 1px; pointer-events: none; }
+    .seg label {
+      display: flex; align-items: center; justify-content: center; gap: 8px; min-height: 42px; padding: 8px 10px;
+      border-radius: 10px; cursor: pointer; font-weight: 650; font-size: 0.95rem; color: var(--text-2); white-space: nowrap;
+    }
+    .seg input:checked + label { background: var(--bg-elev); color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 0 0 0.5px var(--border-strong); }
+    .seg input:focus-visible + label { outline: 3px solid var(--focus); outline-offset: 1px; }
+    .fields { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 14px 12px; align-items: end; }
+    .field-date { grid-column: 1 / -1; }
+    @media (min-width: 560px) {
+      .fields { grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr) auto; }
+      .field-date { grid-column: auto; }
+    }
+    .field input {
+      width: 100%; min-height: 48px; padding: 10px 12px; border-radius: 12px;
+      border: 1px solid var(--border-strong); background: var(--bg-elev); color: var(--text);
+      font: 500 1.05rem/1.2 var(--font); font-variant-numeric: tabular-nums;
+    }
+    .field input:hover { border-color: var(--text-2); }
+    .field input:focus-visible { outline-offset: 1px; border-color: var(--focus); }
+    .field input[aria-invalid="true"] { border-color: #d92d20; }
+    .conv-hint { font-size: 0.9rem; color: var(--text-2); }
+    .conv-result {
+      position: relative; padding: clamp(20px, 3vw, 32px); display: flex; flex-direction: column; gap: 18px;
+      background:
+        radial-gradient(80% 90% at 100% 0%, var(--hero-glow-3), transparent 70%),
+        radial-gradient(70% 80% at 0% 100%, var(--hero-glow-1), transparent 70%),
+        var(--bg-sunken);
+      border-top: 1px solid var(--border);
+    }
+    @media (min-width: 900px) { .conv-result { border-top: 0; border-left: 1px solid var(--border); } }
+    .conv-output { display: flex; flex-direction: column; gap: 6px; }
+    .r-from { color: var(--text-2); font-size: 0.95rem; }
+    .r-main { display: flex; flex-wrap: wrap; align-items: baseline; gap: 6px 12px; margin-top: 2px; }
+    .r-time { font-family: var(--font-rounded); font-size: clamp(2.6rem, 2rem + 2.5vw, 3.6rem); font-weight: 700; line-height: 1; letter-spacing: -0.02em; font-variant-numeric: tabular-nums; white-space: nowrap; }
+    .r-time .period { font-size: 0.5em; margin-left: 0.12em; }
+    .r-abbr { padding: 3px 10px; border-radius: 999px; font-size: 0.95rem; font-weight: 750; background: var(--bg-elev); border: 1px solid var(--border); }
+    .r-abbr.abbr-et { color: var(--et); }
+    .r-abbr.abbr-ist { color: var(--ist); }
+    .r-date { font-size: 1.05rem; font-weight: 600; }
+    .r-shift { display: inline-block; margin-left: 6px; padding: 1px 9px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+    .r-meta { color: var(--text-2); font-size: 0.95rem; }
+    .r-note { padding: 10px 12px; border-radius: 10px; background: var(--bg-elev); border: 1px solid var(--border); font-size: 0.9rem; color: var(--text); }
+    .r-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 10px; margin-top: auto; }
+    .status-text { font-size: 0.9rem; color: var(--ok); font-weight: 600; min-height: 1.4em; }
+
+    /* Gallery */
+    .gallery { display: grid; grid-template-columns: minmax(0, 1fr); gap: 20px; }
+    .size-card { display: flex; flex-direction: column; overflow: hidden; }
+    /* The PNGs are rendered on #e0e0e0 (light) / #141414 (dark), so the frame continues that backdrop. */
+    .shot { margin: 0; background: var(--shot-bg); border-bottom: 1px solid var(--border); display: grid; place-items: center; }
+    .shot img { display: block; width: 100%; }
+    .size-small .shot img { max-width: 240px; }
+    .size-text { padding: 20px 22px 22px; }
+    .size-text h3 { font-size: 1.15rem; font-weight: 700; }
+    .size-text h3 small { font-size: 0.8rem; font-weight: 600; color: var(--text-2); margin-left: 6px; }
+    .size-text p { margin-top: 6px; color: var(--text-2); }
+    @media (min-width: 860px) {
+      .gallery:not(.no-shots) { grid-template-columns: 1.1fr 1fr; grid-template-areas: "large medium" "large small" "digital digital"; }
+      .gallery:not(.no-shots) .size-large { grid-area: large; }
+      .gallery:not(.no-shots) .size-medium { grid-area: medium; }
+      .gallery:not(.no-shots) .size-small { grid-area: small; }
+      .gallery:not(.no-shots) .size-digital { grid-area: digital; }
+      .gallery.no-shots { grid-template-columns: repeat(3, 1fr); }
+      .gallery.no-shots .size-digital { grid-column: 1 / -1; }
+      .size-large .shot { flex: 1; }
+    }
+    @media (min-width: 860px) {
+      .gallery:not(.no-shots) .size-small { flex-direction: row; align-items: stretch; }
+      .gallery:not(.no-shots) .size-small .shot { border-bottom: 0; border-right: 1px solid var(--border); flex: 0 0 46%; }
+      .gallery:not(.no-shots) .size-small .size-text { align-self: center; }
+      .gallery:not(.no-shots) .size-digital { flex-direction: row; align-items: stretch; }
+      .gallery:not(.no-shots) .size-digital .shot { border-bottom: 0; border-right: 1px solid var(--border); flex: 0 0 52%; }
+      .gallery:not(.no-shots) .size-digital .size-text { align-self: center; }
+    }
+    .no-shot .size-text { padding-top: 22px; }
+    .gallery-note { margin-top: 18px; color: var(--text-2); font-size: 0.95rem; }
+
+    /* Features */
+    .features { display: grid; grid-template-columns: minmax(0, 1fr); gap: 16px; list-style: none; margin: 0; padding: 0; }
+    @media (min-width: 600px) { .features { grid-template-columns: repeat(2, 1fr); } }
+    @media (min-width: 1000px) { .features { grid-template-columns: repeat(4, 1fr); } }
+    .feature { padding: 22px; }
+    .feature-icon {
+      display: grid; place-items: center; width: 42px; height: 42px; border-radius: 12px;
+      background: var(--accent-soft); color: var(--accent); margin-bottom: 14px;
+    }
+    .feature-icon svg { width: 22px; height: 22px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+    .feature h3 { font-size: 1.05rem; font-weight: 700; }
+    .feature p { margin-top: 6px; color: var(--text-2); font-size: 0.97rem; }
+
+    /* Steps */
+    .two-col { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(28px, 5vw, 56px); }
+    @media (min-width: 960px) { .two-col { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; } }
+    .steps { list-style: none; margin: 0; padding: 0; counter-reset: step; display: grid; gap: 14px; }
+    .steps li { counter-increment: step; position: relative; padding: 16px 18px 16px 64px; min-height: 60px; }
+    .steps li::before {
+      content: counter(step); position: absolute; left: 16px; top: 14px;
+      display: grid; place-items: center; width: 32px; height: 32px; border-radius: 50%;
+      background: var(--btn-bg); color: var(--on-btn); font-weight: 750; font-size: 0.95rem;
+    }
+    .steps strong { font-weight: 650; }
+    .tip { margin-top: 16px; color: var(--text-2); font-size: 0.95rem; }
+    .menu-path { font-weight: 650; color: var(--text); white-space: nowrap; }
+
+    /* Install */
+    .install-cta { display: flex; flex-wrap: wrap; gap: 12px; margin-bottom: 16px; }
+    .install-links { color: var(--text-2); font-size: 0.95rem; }
+    .callout { padding: clamp(20px, 3vw, 28px); }
+    .callout h3 { font-size: 1.15rem; font-weight: 700; display: flex; gap: 10px; align-items: center; }
+    .callout h3 svg { width: 22px; height: 22px; flex: none; color: var(--ist); }
+    .callout p, .callout ol { margin-top: 10px; color: var(--text-2); }
+    .callout ol { padding-left: 1.3em; }
+    .callout li + li { margin-top: 6px; }
+    .callout li strong { color: var(--text); }
+    .code-block { margin-top: 12px; border-radius: 12px; background: var(--code-bg); color: var(--code-text); border: 1px solid var(--border); overflow: hidden; }
+    .code-head {
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      padding: 6px 6px 6px 16px; border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      font-size: 0.78rem; font-weight: 600; letter-spacing: 0.02em; color: rgba(255, 255, 255, 0.72);
+    }
+    .code-block pre { margin: 0; padding: 12px 16px 14px; white-space: pre-wrap; overflow-wrap: anywhere; line-height: 1.6; }
+    .code-block code { font-size: 0.86rem; color: inherit; }
+    .code-block .copy-code {
+      min-height: 32px; padding: 4px 12px; border-radius: 8px; cursor: pointer;
+      border: 1px solid rgba(255, 255, 255, 0.18); background: rgba(255, 255, 255, 0.08); color: #ffffff; font: 600 0.82rem var(--font);
+    }
+    .code-block .copy-code:hover { background: rgba(255, 255, 255, 0.16); }
+    .code-actions { display: inline-flex; align-items: center; gap: 10px; }
+    .code-status { color: #7ee2a8; font-weight: 600; }
+    .install-links + .callout { margin-top: 32px; }
+    .callout-plain h3 svg { color: var(--accent); }
+
+    /* Table */
+    .legend { display: flex; flex-wrap: wrap; gap: 8px 20px; margin-bottom: 14px; color: var(--text-2); font-size: 0.92rem; }
+    .legend span { display: inline-flex; align-items: center; gap: 8px; }
+    .conv-table { width: 100%; border-collapse: separate; border-spacing: 0; font-variant-numeric: tabular-nums; font-size: 0.98rem; }
+    .conv-table caption { caption-side: bottom; text-align: left; padding: 14px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 0.92rem; }
+    .conv-table th, .conv-table td { padding: 10px 14px; text-align: left; vertical-align: top; border-bottom: 1px solid var(--border); }
+    .conv-table thead th { position: sticky; top: 61px; z-index: 1; background: var(--bg-elev); font-size: 0.85rem; font-weight: 700; color: var(--text); border-bottom: 1px solid var(--border-strong); }
+    .conv-table thead th:first-child { border-top-left-radius: var(--radius); }
+    .conv-table thead th:last-child { border-top-right-radius: var(--radius); }
+    .th-sub { display: block; font-weight: 500; color: var(--text-2); font-size: 0.8rem; }
+    .now-chip { display: inline-block; margin-left: 6px; padding: 0 7px; border-radius: 999px; background: var(--accent-soft); color: var(--accent); font-size: 0.72rem; font-weight: 750; vertical-align: 1px; }
+    .conv-table tbody th { font-weight: 650; }
+    .conv-table tbody tr:last-child > * { border-bottom: 0; }
+    .conv-table tbody tr:hover > * { background: var(--row-now); }
+    .conv-table tr.is-now > * { background: var(--row-now); }
+    .conv-table tr.is-now th { box-shadow: inset 3px 0 0 var(--btn-bg); }
+    .conv-table col.is-active { background: var(--row-now); background: color-mix(in srgb, var(--accent-soft) 45%, transparent); }
+    .t24 { color: var(--text-2); font-size: 0.85em; margin-left: 4px; }
+    .shift { display: block; color: var(--text-2); font-size: 0.82em; }
+    .dot { display: inline-block; width: 8px; height: 8px; margin-right: 8px; border-radius: 50%; background: var(--ok); vertical-align: 1px; }
+    .table-card { padding: 0; }
+    @media (max-width: 599px) {
+      .conv-table { font-size: 0.92rem; }
+      .conv-table th, .conv-table td { padding: 9px 8px; }
+      .conv-table th:first-child, .conv-table td:first-child { padding-left: 12px; }
+      .t24 { display: block; margin-left: 0; }
+      .dot { margin-right: 5px; width: 7px; height: 7px; }
+    }
+
+    /* FAQ */
+    .faq { display: grid; gap: 12px; max-width: 52rem; }
+    .faq details { background: var(--bg-elev); border: 1px solid var(--border); border-radius: 14px; }
+    .section-alt .faq details { background: var(--bg); }
+    .faq summary {
+      list-style: none; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      padding: 16px 20px; font-weight: 650; font-size: 1.04rem; border-radius: 14px;
+    }
+    .faq summary::-webkit-details-marker { display: none; }
+    .faq summary::after {
+      content: ""; flex: none; width: 10px; height: 10px; margin-right: 4px;
+      border-right: 2px solid var(--text-2); border-bottom: 2px solid var(--text-2); transform: rotate(45deg) translate(-2px, -2px);
+    }
+    .faq details[open] summary::after { transform: rotate(225deg) translate(-2px, -2px); }
+    @media (prefers-reduced-motion: no-preference) { .faq summary::after { transition: transform 0.2s ease; } }
+    .faq-answer { padding: 0 20px 18px; color: var(--text-2); }
+
+    /* Footer */
+    .site-footer { padding-block: 48px 40px; border-top: 1px solid var(--border); color: var(--text-2); font-size: 0.95rem; }
+    .footer-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; }
+    @media (min-width: 800px) { .footer-grid { grid-template-columns: 1.2fr 1fr 1.4fr; } }
+    .footer-grid h2 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--text); margin-bottom: 10px; }
+    .footer-links { list-style: none; margin: 0; padding: 0; display: grid; gap: 6px; }
+    .footer-brand p { margin-top: 10px; max-width: 26rem; }
+    .copyright { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--border); font-size: 0.88rem; }
+    .noscript { margin-top: 12px; padding: 10px 14px; border-radius: 10px; background: var(--bg-elev); border: 1px solid var(--border); font-size: 0.92rem; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "IST to EST",
+    "alternateName": "IST to EST Mac widget",
+    "description": "A free, open-source macOS widget and converter that shows India Standard Time (IST) next to US Eastern Time (EST/EDT) in Notification Center or on the desktop.",
+    "url": "https://surendrallam.github.io/ist-to-est-macos-widget/",
+    "sameAs": "https://github.com/surendrallam/ist-to-est-macos-widget",
+    "applicationCategory": "UtilitiesApplication",
+    "operatingSystem": "macOS 14 or later",
+    "softwareVersion": "1.0.0",
+    "downloadUrl": "https://github.com/surendrallam/ist-to-est-macos-widget/releases/latest/download/IST-to-EST.dmg",
+    "license": "https://opensource.org/licenses/MIT",
+    "isAccessibleForFree": true,
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "author": {
+      "@type": "Person",
+      "name": "surendrallam",
+      "url": "https://github.com/surendrallam"
+    },
+    "screenshot": "https://surendrallam.github.io/ist-to-est-macos-widget/screenshots/widget-medium-summer-light.png",
+    "image": "https://surendrallam.github.io/ist-to-est-macos-widget/assets/og-image.png",
+    "featureList": [
+      "Small, medium and large Notification Center and desktop widgets",
+      "Automatic EST and EDT switching using the macOS time zone database",
+      "Hour-by-hour IST to ET table with US working hours",
+      "IST to ET and ET to IST converter with copy",
+      "Light and dark mode",
+      "Works offline with no data collection"
+    ]
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "IST to EST",
+    "url": "https://surendrallam.github.io/ist-to-est-macos-widget/",
+    "description": "IST to EST converter and free Mac widget that shows India time next to US Eastern time.",
+    "inLanguage": "en"
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is the time difference between IST and EST?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "IST is 10 hours 30 minutes ahead of EST. India Standard Time is UTC+5:30 and Eastern Standard Time is UTC−5, so 9:00 PM IST is 10:30 AM EST on the same day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is the time difference between IST and EDT?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "IST is 9 hours 30 minutes ahead of EDT. Eastern Daylight Time is UTC−4, so 9:00 PM IST is 11:30 AM EDT on the same day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "When does the time difference between India and New York change?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Twice a year, because only the US uses daylight saving time. US Eastern clocks spring forward to EDT on the second Sunday of March and fall back to EST on the first Sunday of November. India has no daylight saving time and stays on IST all year, so the gap is 9h 30m from March to November and 10h 30m from November to March."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is EST the same as ET?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Not quite. ET (Eastern Time) is the time zone used by New York; it observes EST (UTC−5) in winter and EDT (UTC−4) in summer. Many people write EST all year, but from March to November the correct abbreviation is EDT. The widget always shows the one in effect."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I convert 9 AM IST to EST?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Subtract 10 hours 30 minutes: 9:00 AM IST is 10:30 PM EST on the previous day. From March to November, when New York is on daylight saving time, subtract 9 hours 30 minutes instead: 9:00 AM IST is 11:30 PM EDT on the previous day."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Does the widget need an internet connection?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. The app and widget work completely offline. They use the time zone database built into macOS, make no network requests and collect no data."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is IST to EST free?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. IST to EST is free and open source under the MIT license. Download it from GitHub Releases or build it yourself from the source code."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which macOS versions are supported?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "IST to EST needs macOS 14 Sonoma or later. It also works on macOS 15 Sequoia and macOS 26 Tahoe."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How do I add the IST to EST widget to Notification Center?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Move IST to EST to the Applications folder and open it once. Then click the date and time in the menu bar to open Notification Center, scroll down and click Edit Widgets, search for “IST to EST” and drag the small, medium or large widget into Notification Center or onto the desktop."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <svg class="sprite" width="0" height="0" aria-hidden="true" focusable="false">
+    <defs>
+      <g id="clock-ticks" stroke="currentColor" stroke-linecap="round">
+        <line x1="50" y1="7" x2="50" y2="15" stroke-width="3" stroke-opacity="0.9"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(30 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(60 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="15" stroke-width="3" stroke-opacity="0.9" transform="rotate(90 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(120 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(150 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="15" stroke-width="3" stroke-opacity="0.9" transform="rotate(180 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(210 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(240 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="15" stroke-width="3" stroke-opacity="0.9" transform="rotate(270 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(300 50 50)"/>
+        <line x1="50" y1="7" x2="50" y2="12.5" stroke-width="2" stroke-opacity="0.45" transform="rotate(330 50 50)"/>
+      </g>
+      <symbol id="i-github" viewBox="0 0 16 16"><path fill="currentColor" d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"/></g></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v1"/></g></symbol>
+      <symbol id="i-swap" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 4v16"/><path d="m3 8 4-4 4 4"/><path d="M17 20V4"/><path d="m21 16-4 4-4-4"/></g></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m13 6 6 6-6 6"/></g></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6z"/><path d="M12 8v5"/><path d="M12 16.5v.01"/></g></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="m7 9 3 3-3 3"/><path d="M13 15h4"/></g></symbol>
+    </defs>
+  </svg>
+
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="./"><img src="favicon.svg" width="28" height="28" alt=""><span>IST to EST</span></a>
+      <nav aria-label="Primary">
+        <ul class="nav-list">
+          <li><a href="#converter">Converter</a></li>
+          <li><a href="#widget">Widget</a></li>
+          <li><a href="#install">Install</a></li>
+          <li><a href="#time-table">Table</a></li>
+          <li><a href="#faq">FAQ</a></li>
+        </ul>
+      </nav>
+      <a class="header-gh" href="https://github.com/surendrallam/ist-to-est-macos-widget"><svg aria-hidden="true"><use href="#i-github"/></svg><span>GitHub</span></a>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <p class="eyebrow"><img src="assets/icon-192.png" width="22" height="22" alt="">Notification Center widget for macOS</p>
+          <h1 id="hero-title">IST to EST converter <span class="grad">&amp; Mac widget</span></h1>
+          <p class="lead">Keep India time and US Eastern time side by side in Notification Center, and convert IST to EST or EDT in one click.</p>
+          <div class="cta">
+            <a class="btn btn-primary" href="https://github.com/surendrallam/ist-to-est-macos-widget/releases/latest/download/IST-to-EST.dmg"><svg aria-hidden="true"><use href="#i-download"/></svg>Download for Mac</a>
+            <a class="btn btn-secondary" href="https://github.com/surendrallam/ist-to-est-macos-widget"><svg aria-hidden="true"><use href="#i-github"/></svg>View on GitHub</a>
+          </div>
+          <p class="fineprint">Free &amp; open source · macOS 14+ · No tracking</p>
+        </div>
+
+        <section class="live" aria-labelledby="live-title">
+          <div class="live-head">
+            <h2 class="live-title" id="live-title"><span class="live-dot" aria-hidden="true"></span>Right now</h2>
+            <p class="live-local" id="live-local"></p>
+          </div>
+          <div class="widget">
+            <div class="zone">
+              <div class="zone-head">
+                <svg class="clock" id="clock-ist" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                  <circle class="face" cx="50" cy="50" r="48"/>
+                  <circle class="ring" cx="50" cy="50" r="47.4"/>
+                  <use href="#clock-ticks"/>
+                  <line class="hand hand-hour" x1="50" y1="54" x2="50" y2="27" stroke-width="6" transform="rotate(305 50 50)"/>
+                  <line class="hand hand-minute" x1="50" y1="54" x2="50" y2="14" stroke-width="4.2" transform="rotate(60 50 50)"/>
+                  <line class="hand hand-second" x1="50" y1="60" x2="50" y2="10" hidden/>
+                  <circle class="hub" cx="50" cy="50" r="5"/>
+                  <circle class="pin" cx="50" cy="50" r="1.8"/>
+                </svg>
+                <p class="zone-meta"><span class="abbr abbr-ist">IST</span><span class="city">New Delhi</span></p>
+              </div>
+              <p class="digital"><span id="ist-time">--:--</span><span class="period" id="ist-period"></span></p>
+              <p class="zone-date" id="ist-date">India</p>
+            </div>
+            <div class="badge" aria-hidden="true">
+              <svg><use href="#i-arrow"/></svg>
+              <span class="badge-text" id="gap-badge">−·:··</span>
+            </div>
+            <div class="zone">
+              <div class="zone-head">
+                <svg class="clock" id="clock-et" viewBox="0 0 100 100" aria-hidden="true" focusable="false">
+                  <circle class="face" cx="50" cy="50" r="48"/>
+                  <circle class="ring" cx="50" cy="50" r="47.4"/>
+                  <use href="#clock-ticks"/>
+                  <line class="hand hand-hour" x1="50" y1="54" x2="50" y2="27" stroke-width="6" transform="rotate(305 50 50)"/>
+                  <line class="hand hand-minute" x1="50" y1="54" x2="50" y2="14" stroke-width="4.2" transform="rotate(60 50 50)"/>
+                  <line class="hand hand-second" x1="50" y1="60" x2="50" y2="10" hidden/>
+                  <circle class="hub" cx="50" cy="50" r="5"/>
+                  <circle class="pin" cx="50" cy="50" r="1.8"/>
+                </svg>
+                <p class="zone-meta"><span class="abbr abbr-et" id="et-abbr">ET</span><span class="city">New York</span></p>
+              </div>
+              <p class="digital"><span id="et-time">--:--</span><span class="period" id="et-period"></span></p>
+              <p class="zone-date" id="et-date">US Eastern</p>
+            </div>
+            <p class="widget-foot"><span id="gap-text">New York is behind India</span><span id="gap-utc">IST is UTC+5:30</span></p>
+          </div>
+          <p class="now-sentence" id="now-sentence">India Standard Time (IST, UTC+5:30) is <strong>9h 30m ahead</strong> of New York while the US is on daylight saving time (EDT, UTC−4) and <strong>10h 30m ahead</strong> during standard time (EST, UTC−5).</p>
+          <noscript><p class="noscript">Turn on JavaScript to see the live clocks and use the converter. The conversion table below works without it.</p></noscript>
+        </section>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="converter" aria-labelledby="converter-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Converter</span>
+          <h2 id="converter-title">IST to EST time converter</h2>
+          <p>Pick a date and time in India or New York to see it in the other zone. Daylight saving time is handled for you, so the result is always labelled EST or EDT correctly.</p>
+        </div>
+
+        <div class="card converter">
+          <div class="conv-form" id="conv-form" role="group" aria-labelledby="converter-title">
+            <fieldset class="seg">
+              <legend>Convert</legend>
+              <div class="seg-track">
+                <input type="radio" name="from" id="from-ist" value="ist" checked>
+                <label for="from-ist">IST → ET</label>
+                <input type="radio" name="from" id="from-et" value="et">
+                <label for="from-et">ET → IST</label>
+              </div>
+            </fieldset>
+            <div class="fields">
+              <div class="field field-date">
+                <label for="conv-date" id="conv-date-label">Date in India (IST)</label>
+                <input type="date" id="conv-date" name="date" value="2026-01-15" required>
+              </div>
+              <div class="field">
+                <label for="conv-time" id="conv-time-label">Time in India (IST)</label>
+                <input type="time" id="conv-time" name="time" value="09:00" required>
+              </div>
+              <button type="button" class="btn btn-small" id="now-btn"><svg aria-hidden="true"><use href="#i-clock"/></svg>Now</button>
+            </div>
+            <p class="conv-hint">Tip: the page address updates as you type, so you can bookmark or share a conversion.</p>
+          </div>
+
+          <div class="conv-result">
+            <output class="conv-output" id="conv-output" for="conv-date conv-time" aria-live="polite" aria-atomic="true">
+              <span class="r-from" id="r-from">Thursday, Jan 15, 2026 at 9:00 AM IST is</span>
+              <span class="r-main"><span class="r-time"><span id="r-time">10:30</span><span class="period" id="r-period"> PM</span></span> <span class="r-abbr abbr-et" id="r-abbr">EST</span></span>
+              <span class="r-date"><span id="r-date">Wednesday, Jan 14, 2026</span> <span class="r-shift" id="r-shift">previous day</span></span>
+              <span class="r-meta" id="r-meta">22:30 in 24-hour time · New York is 10h 30m behind India (UTC−5)</span>
+              <span class="r-note" id="r-note" hidden></span>
+            </output>
+            <div class="r-actions">
+              <button type="button" class="btn btn-small" id="copy-result"><svg aria-hidden="true"><use href="#i-copy"/></svg>Copy result</button>
+              <button type="button" class="btn btn-small" id="swap-btn"><svg aria-hidden="true"><use href="#i-swap"/></svg>Swap</button>
+              <span class="status-text" id="copy-status" role="status"></span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="widget" aria-labelledby="widget-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">The widget</span>
+          <h2 id="widget-title">World Clock and Digital widgets for India and US Eastern time</h2>
+          <p>Pin them in Notification Center next to Apple’s own widgets, or drag them onto your desktop. Choose the style and size that fit how often you schedule calls between India and the US.</p>
+        </div>
+        <div class="gallery" id="gallery">
+          <article class="card size-card size-large">
+            <figure class="shot">
+              <picture>
+                <source srcset="screenshots/widget-large-summer-dark.png" media="(prefers-color-scheme: dark)" width="824" height="860">
+                <img src="screenshots/widget-large-summer-light.png" width="824" height="860" loading="lazy" decoding="async" alt="Large IST to EST widget: analog clocks for New Delhi at 9:30 PM IST and New York at 12:00 PM EDT above an hour-by-hour table converting India time to New York time, with green dots during US working hours">
+              </picture>
+            </figure>
+            <div class="size-text">
+              <h3>Large <small>Plan calls</small></h3>
+              <p>Both clocks plus an hour-by-hour IST → ET table for the next eight hours. A green dot marks US working hours (9 AM–6 PM, Monday to Friday), and a footnote tells you when New York next switches between EDT and EST.</p>
+            </div>
+          </article>
+          <article class="card size-card size-medium">
+            <figure class="shot">
+              <picture>
+                <source srcset="screenshots/widget-medium-summer-dark.png" media="(prefers-color-scheme: dark)" width="824" height="436">
+                <img src="screenshots/widget-medium-summer-light.png" width="824" height="436" loading="lazy" decoding="async" alt="Medium IST to EST widget with two analog World Clock faces: New Delhi 9:30 PM IST and New York 12:00 PM EDT, with a −9:30 offset badge between them">
+              </picture>
+            </figure>
+            <div class="size-text">
+              <h3>Medium <small>World Clock style</small></h3>
+              <p>Two analog faces that turn dark at night, the digital time and date for each city, and an offset badge in the middle.</p>
+            </div>
+          </article>
+          <article class="card size-card size-small">
+            <figure class="shot">
+              <picture>
+                <source srcset="screenshots/widget-small-summer-dark.png" media="(prefers-color-scheme: dark)" width="436" height="436">
+                <img src="screenshots/widget-small-summer-light.png" width="436" height="436" loading="lazy" decoding="async" alt="Small IST to EST widget showing 9:30 PM IST in New Delhi above 12:00 PM EDT in New York, 9h 30m behind">
+              </picture>
+            </figure>
+            <div class="size-text">
+              <h3>Small <small>At a glance</small></h3>
+              <p>Two digital clocks, India on top and New York below, with the current time difference.</p>
+            </div>
+          </article>
+          <article class="card size-card size-digital">
+            <figure class="shot">
+              <picture>
+                <source srcset="screenshots/digital-medium-summer-dark.png" media="(prefers-color-scheme: dark)" width="824" height="436">
+                <img src="screenshots/digital-medium-summer-light.png" width="824" height="436" loading="lazy" decoding="async" alt="Medium IST to EST Digital widget: large digital clocks with seconds, 9:30:00 PM IST in New Delhi above 12:00:00 PM EDT in New York">
+              </picture>
+            </figure>
+            <div class="size-text">
+              <h3>Digital <small>Big numbers, live seconds</small></h3>
+              <p>The <strong>IST to EST Digital</strong> widget shows large digital clocks for both cities with seconds that tick live, a sun or moon for day and night, and the date in each city. It comes in the same three sizes; the large one also spells out the gap and the next daylight saving change.</p>
+            </div>
+          </article>
+        </div>
+        <p class="gallery-note">Both widgets follow your Mac’s light or dark appearance and its 12- or 24-hour clock setting. Search for “IST to EST” in the widget gallery to find them.</p>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="features" aria-labelledby="features-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Features</span>
+          <h2 id="features-title">Everything you need to work across India and US time</h2>
+          <p>Built for distributed teams, families and anyone who keeps asking “what time is it in New York right now?”</p>
+        </div>
+        <ul class="features">
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="8" height="8" rx="2"/><rect x="13" y="3" width="8" height="8" rx="2"/><rect x="3" y="13" width="18" height="8" rx="2"/></svg></span>
+            <h3>Three widget sizes</h3>
+            <p>Small, medium and large layouts for Notification Center or the desktop on macOS Sonoma, Sequoia and Tahoe.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 2.6-6.4L3 8"/><path d="M3 3v5h5"/><path d="M12 7v5l3 2"/></svg></span>
+            <h3>EST or EDT, always right</h3>
+            <p>Uses the macOS time zone database, so New York switches between EST and EDT on exactly the right day.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><path d="M8 13h9"/><path d="M8 17h6"/><circle cx="5.8" cy="13" r="0.6"/><circle cx="5.8" cy="17" r="0.6"/></svg></span>
+            <h3>Plan meetings</h3>
+            <p>The large widget lists the coming hours in IST and ET and highlights US working hours.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4 8h14"/><path d="m15 4 4 4-4 4"/><path d="M20 16H6"/><path d="m9 12-4 4 4 4"/></svg></span>
+            <h3>Built-in converter</h3>
+            <p>The app converts any date and time from IST to ET or back, with swap and one-click copy.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 1 0 18z" fill="currentColor"/></svg></span>
+            <h3>Light and dark</h3>
+            <p>Follows your Mac’s appearance, and analog faces turn dark at night, just like World Clock.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 3 5 6v6c0 4.4 3 7.6 7 9 4-1.4 7-4.6 7-9V6z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <h3>Private and offline</h3>
+            <p>No network access, no accounts, no analytics. Everything is calculated on your Mac.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></svg></span>
+            <h3>Native and lightweight</h3>
+            <p>Written in SwiftUI and WidgetKit. The widget refreshes every minute without draining your battery.</p>
+          </li>
+          <li class="card feature">
+            <span class="feature-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m8 6-6 6 6 6"/><path d="m16 6 6 6-6 6"/></svg></span>
+            <h3>Free and open source</h3>
+            <p>MIT-licensed on GitHub. Read the code, report issues or build it yourself.</p>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section" id="add-widget" aria-labelledby="add-widget-title">
+      <div class="container two-col">
+        <div class="section-head">
+          <span class="kicker">Setup</span>
+          <h2 id="add-widget-title">How to add the widget to Notification Center</h2>
+          <p>It takes about thirty seconds. These steps work on macOS 14 Sonoma, macOS 15 Sequoia and macOS 26 Tahoe.</p>
+          <p class="tip">Prefer the desktop? Right-click an empty part of the desktop, choose <span class="menu-path">Edit Widgets…</span> and drag IST to EST wherever you like.</p>
+        </div>
+        <ol class="steps">
+          <li class="card">Move <strong>IST to EST</strong> to your <strong>Applications</strong> folder and open it once.</li>
+          <li class="card">Click the <strong>date and time</strong> in the menu bar to open Notification Center.</li>
+          <li class="card">Scroll to the bottom and click <strong>Edit Widgets</strong>.</li>
+          <li class="card">Search for <strong>“IST to EST”</strong> in the widget gallery.</li>
+          <li class="card">Drag the <strong>small, medium or large</strong> widget into Notification Center or onto the desktop, then click <strong>Done</strong>.</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="install" aria-labelledby="install-title">
+      <div class="container two-col">
+        <div>
+          <div class="section-head">
+            <span class="kicker">Download</span>
+            <h2 id="install-title">Download IST to EST for Mac</h2>
+            <p>Version 1.0.0 for macOS 14 Sonoma or later. Open the disk image, drag <strong>IST to EST</strong> into Applications and launch it once.</p>
+          </div>
+          <div class="install-cta">
+            <a class="btn btn-primary" href="https://github.com/surendrallam/ist-to-est-macos-widget/releases/latest/download/IST-to-EST.dmg"><svg aria-hidden="true"><use href="#i-download"/></svg>Download DMG</a>
+            <a class="btn btn-secondary" href="https://github.com/surendrallam/ist-to-est-macos-widget/releases/latest/download/IST-to-EST.zip">Download ZIP</a>
+          </div>
+          <p class="install-links">Checksums: <a href="https://github.com/surendrallam/ist-to-est-macos-widget/releases/latest/download/SHA256SUMS.txt">SHA256SUMS.txt</a> · <a href="https://github.com/surendrallam/ist-to-est-macos-widget/releases">All releases</a></p>
+          <div class="card callout callout-plain">
+            <h3><svg aria-hidden="true"><use href="#i-terminal"/></svg>Build from source</h3>
+            <p>No Apple developer account needed. Install Xcode and <a href="https://github.com/yonaskolb/XcodeGen">XcodeGen</a>, then:</p>
+            <div class="code-block">
+              <div class="code-head"><span>Terminal</span><span class="code-actions"><span class="code-status" role="status"></span><button type="button" class="copy-code" data-copy-target="build-cmd" aria-label="Copy build commands">Copy</button></span></div>
+              <pre><code id="build-cmd">git clone https://github.com/surendrallam/ist-to-est-macos-widget.git
+cd ist-to-est-macos-widget
+xcodegen generate
+open ISTtoEST.xcodeproj</code></pre>
+            </div>
+          </div>
+        </div>
+        <div>
+          <div class="card callout">
+            <h3><svg aria-hidden="true"><use href="#i-shield"/></svg>If macOS won’t open the app</h3>
+            <p>Releases built without an Apple Developer ID are ad-hoc signed, so Gatekeeper blocks the first launch with a message that Apple could not verify the app. You only need to do this once:</p>
+            <ol>
+              <li>Open <strong>System Settings › Privacy &amp; Security</strong>, scroll down and click <strong>Open Anyway</strong> next to the message about IST to EST, then confirm.</li>
+              <li>Or remove the quarantine flag in Terminal:</li>
+            </ol>
+            <div class="code-block">
+              <div class="code-head"><span>Terminal</span><span class="code-actions"><span class="code-status" role="status"></span><button type="button" class="copy-code" data-copy-target="xattr-cmd" aria-label="Copy Terminal command">Copy</button></span></div>
+              <pre><code id="xattr-cmd">xattr -dr com.apple.quarantine "/Applications/IST to EST.app"</code></pre>
+            </div>
+            <p>Releases that are signed with a Developer ID and notarized by Apple open without this step.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="time-table" aria-labelledby="table-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">Cheat sheet</span>
+          <h2 id="table-title">IST to EST and EDT time conversion table</h2>
+          <p>India doesn’t change its clocks, so converting IST to Eastern time only depends on the season in the US. Subtract <strong>9 hours 30 minutes</strong> while New York is on EDT (March to November) and <strong>10 hours 30 minutes</strong> while it is on EST (November to March).</p>
+        </div>
+        <p class="legend"><span><span class="dot" aria-hidden="true"></span>US working hours (9 AM–6 PM ET)</span><span id="table-now-note">Times on the previous day are marked “(previous day)”.</span></p>
+        <div class="card table-card">
+          <table class="conv-table">
+            <caption>Every hour of the day in India Standard Time converted to New York time in summer (EDT, UTC−4) and winter (EST, UTC−5).</caption>
+            <colgroup><col><col id="col-edt"><col id="col-est"></colgroup>
+            <thead>
+              <tr>
+                <th scope="col">India <span class="th-sub">IST · UTC+5:30</span></th>
+                <th scope="col" id="th-edt">New York, summer <span class="th-sub">EDT · IST − 9:30</span></th>
+                <th scope="col" id="th-est">New York, winter <span class="th-sub">EST · IST − 10:30</span></th>
+              </tr>
+            </thead>
+            <tbody id="table-body">
+              <tr><th scope="row"><span class="t12">12:00 AM</span> <span class="t24">00:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">2:30 PM</span> <span class="t24">14:30</span> <span class="shift">(previous day)</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">1:30 PM</span> <span class="t24">13:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">1:00 AM</span> <span class="t24">01:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">3:30 PM</span> <span class="t24">15:30</span> <span class="shift">(previous day)</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">2:30 PM</span> <span class="t24">14:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">2:00 AM</span> <span class="t24">02:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">4:30 PM</span> <span class="t24">16:30</span> <span class="shift">(previous day)</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">3:30 PM</span> <span class="t24">15:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">3:00 AM</span> <span class="t24">03:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">5:30 PM</span> <span class="t24">17:30</span> <span class="shift">(previous day)</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">4:30 PM</span> <span class="t24">16:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">4:00 AM</span> <span class="t24">04:00</span></th><td><span class="t12">6:30 PM</span> <span class="t24">18:30</span> <span class="shift">(previous day)</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">5:30 PM</span> <span class="t24">17:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">5:00 AM</span> <span class="t24">05:00</span></th><td><span class="t12">7:30 PM</span> <span class="t24">19:30</span> <span class="shift">(previous day)</span></td><td><span class="t12">6:30 PM</span> <span class="t24">18:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">6:00 AM</span> <span class="t24">06:00</span></th><td><span class="t12">8:30 PM</span> <span class="t24">20:30</span> <span class="shift">(previous day)</span></td><td><span class="t12">7:30 PM</span> <span class="t24">19:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">7:00 AM</span> <span class="t24">07:00</span></th><td><span class="t12">9:30 PM</span> <span class="t24">21:30</span> <span class="shift">(previous day)</span></td><td><span class="t12">8:30 PM</span> <span class="t24">20:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">8:00 AM</span> <span class="t24">08:00</span></th><td><span class="t12">10:30 PM</span> <span class="t24">22:30</span> <span class="shift">(previous day)</span></td><td><span class="t12">9:30 PM</span> <span class="t24">21:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">9:00 AM</span> <span class="t24">09:00</span></th><td><span class="t12">11:30 PM</span> <span class="t24">23:30</span> <span class="shift">(previous day)</span></td><td><span class="t12">10:30 PM</span> <span class="t24">22:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">10:00 AM</span> <span class="t24">10:00</span></th><td><span class="t12">12:30 AM</span> <span class="t24">00:30</span></td><td><span class="t12">11:30 PM</span> <span class="t24">23:30</span> <span class="shift">(previous day)</span></td></tr>
+              <tr><th scope="row"><span class="t12">11:00 AM</span> <span class="t24">11:00</span></th><td><span class="t12">1:30 AM</span> <span class="t24">01:30</span></td><td><span class="t12">12:30 AM</span> <span class="t24">00:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">12:00 PM</span> <span class="t24">12:00</span></th><td><span class="t12">2:30 AM</span> <span class="t24">02:30</span></td><td><span class="t12">1:30 AM</span> <span class="t24">01:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">1:00 PM</span> <span class="t24">13:00</span></th><td><span class="t12">3:30 AM</span> <span class="t24">03:30</span></td><td><span class="t12">2:30 AM</span> <span class="t24">02:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">2:00 PM</span> <span class="t24">14:00</span></th><td><span class="t12">4:30 AM</span> <span class="t24">04:30</span></td><td><span class="t12">3:30 AM</span> <span class="t24">03:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">3:00 PM</span> <span class="t24">15:00</span></th><td><span class="t12">5:30 AM</span> <span class="t24">05:30</span></td><td><span class="t12">4:30 AM</span> <span class="t24">04:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">4:00 PM</span> <span class="t24">16:00</span></th><td><span class="t12">6:30 AM</span> <span class="t24">06:30</span></td><td><span class="t12">5:30 AM</span> <span class="t24">05:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">5:00 PM</span> <span class="t24">17:00</span></th><td><span class="t12">7:30 AM</span> <span class="t24">07:30</span></td><td><span class="t12">6:30 AM</span> <span class="t24">06:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">6:00 PM</span> <span class="t24">18:00</span></th><td><span class="t12">8:30 AM</span> <span class="t24">08:30</span></td><td><span class="t12">7:30 AM</span> <span class="t24">07:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">7:00 PM</span> <span class="t24">19:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">9:30 AM</span> <span class="t24">09:30</span></td><td><span class="t12">8:30 AM</span> <span class="t24">08:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">8:00 PM</span> <span class="t24">20:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">10:30 AM</span> <span class="t24">10:30</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">9:30 AM</span> <span class="t24">09:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">9:00 PM</span> <span class="t24">21:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">11:30 AM</span> <span class="t24">11:30</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">10:30 AM</span> <span class="t24">10:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">10:00 PM</span> <span class="t24">22:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">12:30 PM</span> <span class="t24">12:30</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">11:30 AM</span> <span class="t24">11:30</span></td></tr>
+              <tr><th scope="row"><span class="t12">11:00 PM</span> <span class="t24">23:00</span></th><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">1:30 PM</span> <span class="t24">13:30</span></td><td class="work"><span class="dot" role="img" aria-label="US working hours"></span><span class="t12">12:30 PM</span> <span class="t24">12:30</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <section class="section section-alt" id="faq" aria-labelledby="faq-title">
+      <div class="container">
+        <div class="section-head">
+          <span class="kicker">FAQ</span>
+          <h2 id="faq-title">Frequently asked questions</h2>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>What is the time difference between IST and EST?</summary>
+            <div class="faq-answer"><p>IST is 10 hours 30 minutes ahead of EST. India Standard Time is UTC+5:30 and Eastern Standard Time is UTC−5, so 9:00 PM IST is 10:30 AM EST on the same day.</p></div>
+          </details>
+          <details>
+            <summary>What is the time difference between IST and EDT?</summary>
+            <div class="faq-answer"><p>IST is 9 hours 30 minutes ahead of EDT. Eastern Daylight Time is UTC−4, so 9:00 PM IST is 11:30 AM EDT on the same day.</p></div>
+          </details>
+          <details>
+            <summary>When does the time difference between India and New York change?</summary>
+            <div class="faq-answer"><p>Twice a year, because only the US uses daylight saving time. US Eastern clocks spring forward to EDT on the second Sunday of March and fall back to EST on the first Sunday of November. India has no daylight saving time and stays on IST all year, so the gap is 9h 30m from March to November and 10h 30m from November to March.</p></div>
+          </details>
+          <details>
+            <summary>Is EST the same as ET?</summary>
+            <div class="faq-answer"><p>Not quite. ET (Eastern Time) is the time zone used by New York; it observes EST (UTC−5) in winter and EDT (UTC−4) in summer. Many people write EST all year, but from March to November the correct abbreviation is EDT. The widget always shows the one in effect.</p></div>
+          </details>
+          <details>
+            <summary>How do I convert 9 AM IST to EST?</summary>
+            <div class="faq-answer"><p>Subtract 10 hours 30 minutes: 9:00 AM IST is 10:30 PM EST on the previous day. From March to November, when New York is on daylight saving time, subtract 9 hours 30 minutes instead: 9:00 AM IST is 11:30 PM EDT on the previous day.</p></div>
+          </details>
+          <details>
+            <summary>Does the widget need an internet connection?</summary>
+            <div class="faq-answer"><p>No. The app and widget work completely offline. They use the time zone database built into macOS, make no network requests and collect no data.</p></div>
+          </details>
+          <details>
+            <summary>Is IST to EST free?</summary>
+            <div class="faq-answer"><p>Yes. IST to EST is free and open source under the MIT license. Download it from GitHub Releases or build it yourself from the source code.</p></div>
+          </details>
+          <details>
+            <summary>Which macOS versions are supported?</summary>
+            <div class="faq-answer"><p>IST to EST needs macOS 14 Sonoma or later. It also works on macOS 15 Sequoia and macOS 26 Tahoe.</p></div>
+          </details>
+          <details>
+            <summary>How do I add the IST to EST widget to Notification Center?</summary>
+            <div class="faq-answer"><p>Move IST to EST to the Applications folder and open it once. Then click the date and time in the menu bar to open Notification Center, scroll down and click Edit Widgets, search for “IST to EST” and drag the small, medium or large widget into Notification Center or onto the desktop.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" href="./"><img src="favicon.svg" width="28" height="28" alt=""><span>IST to EST</span></a>
+          <p>A free, open-source macOS widget and converter for India Standard Time and US Eastern Time.</p>
+        </div>
+        <nav aria-label="Project">
+          <h2>Project</h2>
+          <ul class="footer-links">
+            <li><a href="https://github.com/surendrallam/ist-to-est-macos-widget">Source code on GitHub</a></li>
+            <li><a href="https://github.com/surendrallam/ist-to-est-macos-widget/releases">Releases and changelog</a></li>
+            <li><a href="https://github.com/surendrallam/ist-to-est-macos-widget/blob/main/LICENSE">MIT License</a></li>
+            <li><a href="https://github.com/surendrallam/ist-to-est-macos-widget/issues">Report an issue</a></li>
+          </ul>
+        </nav>
+        <div>
+          <h2>Privacy</h2>
+          <p>This website sets no cookies, uses no analytics and loads nothing from third parties. The app has no network access and collects no data.</p>
+        </div>
+      </div>
+      <p class="copyright">© 2026 <a href="https://github.com/surendrallam">surendrallam</a>. Released under the MIT License. Not affiliated with Apple.</p>
+    </div>
+  </footer>
+</body>
+</html>

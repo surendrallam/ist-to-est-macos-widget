@@ -1,0 +1,88 @@
+# ---------------------------------------------------------------------------
+# Generated from project.yml by XcodeGen (`make project`). Never edit by hand.
+# ---------------------------------------------------------------------------
+/*.xcodeproj
+/*.xcworkspace
+/App/Info.plist
+/Widget/Info.plist
+/App/ISTtoEST.entitlements
+/Widget/ISTtoESTWidget.entitlements
+
+# ---------------------------------------------------------------------------
+# Build output
+# ---------------------------------------------------------------------------
+build/
+DerivedData/
+*.xcresult
+*.dmg
+*.dSYM
+*.dSYM.zip
+*.xcarchive
+
+# Widget screenshots are rendered by the snapshot tests and published by the
+# Pages workflow (`make snapshots` renders them locally into build/snapshots).
+/docs/screenshots/
+
+# ---------------------------------------------------------------------------
+# Xcode user data
+# ---------------------------------------------------------------------------
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+*.xccheckout
+*.moved-aside
+*.hmap
+*.ipa
+timeline.xctimeline
+playground.xcworkspace
+
+# ---------------------------------------------------------------------------
+# Swift Package Manager
+# ---------------------------------------------------------------------------
+.build/
+.swiftpm/
+Packages/*/.build/
+Packages/*/.swiftpm/
+
+# ---------------------------------------------------------------------------
+# Python (icon generator)
+# ---------------------------------------------------------------------------
+__pycache__/
+*.pyc
+
+# ---------------------------------------------------------------------------
+# Node (website tooling)
+# ---------------------------------------------------------------------------
+node_modules/
+npm-debug.log*
+.npm/
+
+# ---------------------------------------------------------------------------
+# Signing material — never commit certificates or API keys
+# ---------------------------------------------------------------------------
+*.p12
+*.cer
+*.p8
+*.mobileprovision
+*.provisionprofile
+*.keychain
+*.keychain-db
+.env
+.env.*
+
+# ---------------------------------------------------------------------------
+# macOS / editors
+# ---------------------------------------------------------------------------
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+.fseventsd
+.DocumentRevisions-V100
+.TemporaryItems
+.vscode/
+.idea/
+*.swp
+*~

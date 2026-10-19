@@ -1,0 +1,52 @@
+name: Feature request
+description: Suggest an improvement to the widget, the app or the website.
+title: '[Feature] '
+labels: [enhancement]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea! IST to EST stays small on purpose: two time zones, no network access and no data collection. Suggestions that fit that spirit are the most likely to land.
+
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - Widget
+        - App window / converter
+        - Website
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: problem
+    attributes:
+      label: What problem would this solve?
+      placeholder: I schedule calls with New York and want to see…
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: What would you like to happen?
+      description: Mock-ups and screenshots are welcome.
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives you've considered
+    validations:
+      required: false
+
+  - type: checkboxes
+    id: contribute
+    attributes:
+      label: Contributing
+      options:
+        - label: I'd like to open a pull request for this.
+          required: false

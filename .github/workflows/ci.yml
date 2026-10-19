@@ -1,0 +1,177 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+env:
+  SWIFTLINT_IMAGE: ghcr.io/realm/swiftlint:0.59.1
+  ACTIONLINT_IMAGE: rhysd/actionlint:1.7.7
+
+jobs:
+  core-linux:
+    name: Core tests (Linux)
+    runs-on: ubuntu-latest
+    container: swift:6.1-noble
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install time zone database
+        env:
+          DEBIAN_FRONTEND: noninteractive
+        run: apt-get update -qq && apt-get install -y -qq --no-install-recommends tzdata
+
+      - name: Test TimeConversionKit
+        run: swift test --package-path Packages/TimeConversionKit
+
+  core-macos:
+    name: Core tests (macOS)
+    runs-on: macos-15
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Test TimeConversionKit
+        run: swift test --package-path Packages/TimeConversionKit
+
+  app:
+    name: App, widget & snapshot tests
+    runs-on: macos-15
+    timeout-minutes: 45
+    env:
+      APP_PATH: build/DerivedData/Build/Products/Release/IST to EST.app
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Show toolchain
+        run: |
+          sw_vers
+          xcodebuild -version
+          swift --version
+
+      - name: Install XcodeGen and xcbeautify
+        run: brew install xcodegen xcbeautify
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Build app (Release, ad-hoc signed)
+        run: |
+          set -o pipefail
+          xcodebuild build \
+            -project ISTtoEST.xcodeproj \
+            -scheme ISTtoEST \
+            -configuration Release \
+            -destination 'generic/platform=macOS' \
+            -derivedDataPath build/DerivedData \
+            | xcbeautify --renderer github-actions
+
+      - name: Verify bundle, widget extension and entitlements
+        run: |
+          appex="$APP_PATH/Contents/PlugIns/ISTtoESTWidget.appex"
+          if [[ ! -d "$appex" ]]; then
+            echo "::error::ISTtoESTWidget.appex is not embedded in $APP_PATH"
+            exit 1
+          fi
+          point="$(/usr/libexec/PlistBuddy -c 'Print :NSExtension:NSExtensionPointIdentifier' "$appex/Contents/Info.plist")"
+          if [[ "$point" != com.apple.widgetkit-extension ]]; then
+            echo "::error::Unexpected NSExtensionPointIdentifier: $point"
+            exit 1
+          fi
+          codesign --verify --deep --strict --verbose=2 "$APP_PATH"
+          for bundle in "$APP_PATH" "$appex"; do
+            entitlements="$(codesign -d --entitlements - "$bundle" 2>&1)"
+            echo "$entitlements"
+            if [[ "$entitlements" != *com.apple.security.app-sandbox* ]]; then
+              echo "::error::$(basename "$bundle") is missing the App Sandbox entitlement"
+              exit 1
+            fi
+          done
+          echo "Architectures: $(lipo -archs "$APP_PATH/Contents/MacOS/IST to EST")"
+
+      - name: Run tests and render widget snapshots
+        env:
+          TEST_RUNNER_SNAPSHOT_OUTPUT_DIR: ${{ runner.temp }}/snapshots
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project ISTtoEST.xcodeproj \
+            -scheme ISTtoEST \
+            -destination 'platform=macOS' \
+            -derivedDataPath build/DerivedData \
+            -resultBundlePath "$RUNNER_TEMP/ISTtoESTTests.xcresult" \
+            | xcbeautify --renderer github-actions
+
+      - name: Upload widget snapshots
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: widget-snapshots
+          path: ${{ runner.temp }}/snapshots/*.png
+          if-no-files-found: warn
+
+      - name: Upload test results
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-results
+          path: ${{ runner.temp }}/ISTtoESTTests.xcresult
+          if-no-files-found: ignore
+
+  lint:
+    name: SwiftLint
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run SwiftLint (strict)
+        run: |
+          docker run --rm -v "$PWD:/work" -w /work "$SWIFTLINT_IMAGE" \
+            swiftlint lint --strict --reporter github-actions-logging
+
+  site:
+    name: Website
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Run website tests
+        run: |
+          # node --test passes silently when it finds no tests, so make sure there are some.
+          if ! ls docs/tests/*.test.*js >/dev/null 2>&1; then
+            echo "::error::No *.test.mjs files found in docs/tests"
+            exit 1
+          fi
+          node --test docs/tests/
+
+      - name: Validate structured data (JSON-LD)
+        run: node scripts/check-jsonld.mjs docs/index.html
+
+  actionlint:
+    name: Workflows & scripts
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: actionlint
+        run: docker run --rm -v "$PWD:/repo" -w /repo "$ACTIONLINT_IMAGE" -color
+
+      - name: ShellCheck
+        run: shellcheck scripts/*.sh

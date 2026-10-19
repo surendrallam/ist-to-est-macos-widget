@@ -1,0 +1,19 @@
+{
+  "name": "ist-to-est-macos-widget-tooling",
+  "private": true,
+  "description": "Tooling for the website and generated assets. The macOS app itself is built with Xcode.",
+  "type": "module",
+  "scripts": {
+    "icons": "python3 scripts/make_icon_svg.py && node scripts/render-icons.mjs",
+    "og-image": "node scripts/render-og-image.mjs",
+    "test:site": "node --test docs/tests/",
+    "check:jsonld": "node scripts/check-jsonld.mjs docs/index.html",
+    "serve": "npx --yes serve docs"
+  },
+  "devDependencies": {
+    "playwright": "1.56.1"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

@@ -1,0 +1,146 @@
+# SwiftLint configuration. Run `make lint`; CI runs `swiftlint lint --strict`, so
+# warnings fail the build too.
+
+included:
+  - App
+  - Widget
+  - Shared
+  - Tests
+  - Packages/TimeConversionKit/Sources
+  - Packages/TimeConversionKit/Tests
+
+excluded:
+  - build
+  - DerivedData
+  - .build
+  - Packages/TimeConversionKit/.build
+  - ISTtoEST.xcodeproj
+  - node_modules
+  - docs
+
+opt_in_rules:
+  # Correctness & clarity
+  - array_init
+  - collection_alignment
+  - contains_over_filter_count
+  - contains_over_filter_is_empty
+  - contains_over_first_not_nil
+  - contains_over_range_nil_comparison
+  - discouraged_assert
+  - discouraged_none_name
+  - discouraged_object_literal
+  - empty_collection_literal
+  - empty_count
+  - empty_string
+  - fatal_error_message
+  - first_where
+  - flatmap_over_map_reduce
+  - force_unwrapping
+  - identical_operands
+  - last_where
+  - legacy_multiple
+  - legacy_objc_type
+  - lower_acl_than_parent
+  - overridden_super_call
+  - private_swiftui_state
+  - reduce_into
+  - redundant_nil_coalescing
+  - redundant_type_annotation
+  - sorted_first_last
+  - static_operator
+  - toggle_bool
+  - unowned_variable_capture
+  - yoda_condition
+  # Style & formatting
+  - closure_end_indentation
+  - closure_spacing
+  - comma_inheritance
+  - convenience_type
+  - explicit_init
+  - implicit_return
+  - joined_default_parameter
+  - literal_expression_end_indentation
+  - modifier_order
+  - multiline_arguments
+  - multiline_parameters
+  - number_separator
+  - operator_usage_whitespace
+  - optional_enum_case_matching
+  - prefer_self_in_static_references
+  - prefer_self_type_over_type_of_self
+  - prefer_zero_over_explicit_init
+  - shorthand_optional_binding
+  - sorted_imports
+  - unneeded_parentheses_in_closure_argument
+  - vertical_parameter_alignment_on_call
+  - vertical_whitespace_closing_braces
+  - vertical_whitespace_opening_braces
+  # Tests
+  - balanced_xctest_lifecycle
+  - empty_xctest_method
+  - test_case_accessibility
+  - xct_specific_matcher
+  # Accessibility (SwiftUI)
+  - accessibility_label_for_image
+  - accessibility_trait_for_button
+
+# Multi-line collection literals end with a trailing comma (cleaner diffs),
+# matching the existing code.
+trailing_comma:
+  mandatory_comma: true
+
+line_length:
+  warning: 140
+  error: 200
+  ignores_comments: true
+  ignores_urls: true
+  ignores_interpolated_strings: true
+
+# Two-letter names such as `id`, `us` and `uk` (locale samples in tests) are fine;
+# single letters only for coordinates.
+identifier_name:
+  min_length:
+    warning: 2
+    error: 1
+  excluded:
+    - x
+    - y
+
+type_name:
+  min_length: 3
+  max_length: 50
+
+file_length:
+  warning: 400
+  error: 600
+
+type_body_length:
+  warning: 250
+  error: 400
+
+function_body_length:
+  warning: 60
+  error: 100
+
+cyclomatic_complexity:
+  warning: 12
+  error: 20
+  ignores_case_statements: true
+
+large_tuple:
+  warning: 3
+  error: 4
+
+# Only flag `.count == 0`, not an Int parameter that happens to be named `count`.
+empty_count:
+  only_after_dot: true
+
+number_separator:
+  minimum_length: 5
+
+implicit_return:
+  included:
+    - closure
+    - getter
+    - function
+

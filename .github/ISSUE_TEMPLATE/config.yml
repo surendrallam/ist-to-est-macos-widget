@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: FAQ and setup help
+    url: https://surendrallam.github.io/ist-to-est-macos-widget/#faq
+    about: Widget missing from the gallery? "App can't be opened"? Start here.
+  - name: Report a security vulnerability
+    url: https://github.com/surendrallam/ist-to-est-macos-widget/security/advisories/new
+    about: Please report security problems privately instead of opening a public issue.

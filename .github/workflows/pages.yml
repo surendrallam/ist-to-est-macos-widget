@@ -1,0 +1,123 @@
+name: Pages
+
+# Publishes docs/ to https://surendrallam.github.io/ist-to-est-macos-widget/ together
+# with freshly rendered widget screenshots (served under /screenshots/).
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'docs/**'
+      - 'Shared/**'
+      - 'Widget/**'
+      - 'App/**'
+      - 'Packages/**'
+      - 'Tests/**'
+      - 'project.yml'
+      - '.github/workflows/pages.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  snapshots:
+    name: Render widget screenshots
+    runs-on: macos-15
+    timeout-minutes: 30
+    # A rendering problem must not block website updates; the deploy job falls
+    # back to the screenshots that are already live.
+    continue-on-error: true
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install XcodeGen and xcbeautify
+        run: brew install xcodegen xcbeautify
+
+      - name: Generate Xcode project
+        run: xcodegen generate
+
+      - name: Render snapshots
+        env:
+          TEST_RUNNER_SNAPSHOT_OUTPUT_DIR: ${{ runner.temp }}/screenshots
+        run: |
+          set -o pipefail
+          xcodebuild test \
+            -project ISTtoEST.xcodeproj \
+            -scheme ISTtoEST \
+            -destination 'platform=macOS' \
+            -derivedDataPath build/DerivedData \
+            -only-testing:ISTtoESTTests/WidgetSnapshotTests \
+            | xcbeautify --renderer github-actions
+          ls -l "$TEST_RUNNER_SNAPSHOT_OUTPUT_DIR"
+
+      - name: Upload screenshots
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots
+          path: ${{ runner.temp }}/screenshots/*.png
+          if-no-files-found: error
+          retention-days: 14
+
+  deploy:
+    name: Deploy website
+    needs: snapshots
+    # Deploy even when the snapshot job failed, but not when the run was cancelled.
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Download screenshots
+        id: screenshots
+        continue-on-error: true
+        uses: actions/download-artifact@v4
+        with:
+          name: screenshots
+          path: docs/screenshots
+
+      - name: Fall back to the live screenshots
+        env:
+          SITE_URL: https://surendrallam.github.io/ist-to-est-macos-widget
+        run: |
+          mkdir -p docs/screenshots
+          if ls docs/screenshots/*.png >/dev/null 2>&1; then
+            echo "Using screenshots rendered in this run:"
+            ls docs/screenshots
+            exit 0
+          fi
+          echo "::warning::No new screenshots were rendered; reusing the ones currently published."
+          for style in widget digital; do
+            for size in small medium large; do
+              for season in summer winter; do
+                for scheme in light dark; do
+                  name="$style-$size-$season-$scheme.png"
+                  curl -fsSL --retry 3 -o "docs/screenshots/$name" "$SITE_URL/screenshots/$name" \
+                    || { rm -f "docs/screenshots/$name"; echo "::warning::Could not fetch $name"; }
+                done
+              done
+            done
+          done
+
+      - name: Leave development-only files out of the site
+        run: rm -rf docs/tests
+
+      - uses: actions/configure-pages@v5
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: docs
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
