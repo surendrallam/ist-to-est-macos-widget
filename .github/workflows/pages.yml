@@ -35,7 +35,7 @@ jobs:
     # back to the screenshots that are already live.
     continue-on-error: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Install XcodeGen and xcbeautify
         run: brew install xcodegen xcbeautify
@@ -58,7 +58,7 @@ jobs:
           ls -l "$TEST_RUNNER_SNAPSHOT_OUTPUT_DIR"
 
       - name: Upload screenshots
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: screenshots
           path: ${{ runner.temp }}/screenshots/*.png
@@ -76,12 +76,12 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v7
 
       - name: Download screenshots
         id: screenshots
         continue-on-error: true
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           name: screenshots
           path: docs/screenshots
@@ -112,12 +112,12 @@ jobs:
       - name: Leave development-only files out of the site
         run: rm -rf docs/tests
 
-      - uses: actions/configure-pages@v5
+      - uses: actions/configure-pages@v6
 
-      - uses: actions/upload-pages-artifact@v3
+      - uses: actions/upload-pages-artifact@v5
         with:
           path: docs
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v4
+        uses: actions/deploy-pages@v5
